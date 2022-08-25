@@ -23,6 +23,10 @@ public class StudentService {
         return studentRepository.findAll();
 
     }
+
+    public void addNewStudent(Student student) {
+        System.out.println(student);
+    }
 }
 /*
 there is a confusion for me atm, the studentRepository is an interface and we have created an instacne of an interface and using it
