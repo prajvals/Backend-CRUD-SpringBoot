@@ -1,19 +1,32 @@
 package com.example.demo.student;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class StudentService {
 
-    public ArrayList<Student> getStudent()
+    @Autowired
+    private final StudentRepository studentRepository;
+
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
+
+    public List<Student> getStudent()
     {
-        return new ArrayList<Student>(){{
-            add(new Student(1L,"Prajval Singh",23, LocalDate.of(1999, Month.JUNE,06),"prajval.singh@getonedirect.com"));
-        }};
+        return studentRepository.findAll();
 
     }
 }
+/*
+there is a confusion for me atm, the studentRepository is an interface and we have created an instacne of an interface and using it
+how is that even possible
+there must be something else that would be working in it
+
+ */
