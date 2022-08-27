@@ -34,6 +34,19 @@ public class StudentService {
         studentRepository.save(student);
 
     }
+
+    public void deleteStudentById(Long id) {
+        boolean exists = studentRepository.existsById(id);
+        if(exists)
+        {
+            System.out.println("called with the id " + id);
+//            Student studentToBeDeleted = studentRepository.findById(id).get();
+            studentRepository.delete(studentRepository.findById(id).get());
+        }
+        else {
+            throw new IllegalStateException("No such entity exists");
+        }
+    }
 }
 /*
 there is a confusion for me atm, the studentRepository is an interface and we have created an instacne of an interface and using it

@@ -31,6 +31,13 @@ public class StudentController {
         System.out.println(student);
         studentServices.addNewStudent(student);
     }
+
+    @DeleteMapping(path = "{StudentId}")
+    public void deleteStudent(@PathVariable Long Id)
+    {
+        System.out.println(Id);
+        studentServices.deleteStudentById(Id);
+    }
 }
 
 /*
