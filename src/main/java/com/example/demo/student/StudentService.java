@@ -37,7 +37,7 @@ public class StudentService {
         if(exists)
         {
             System.out.println("called with the id " + id);
-//            Student studentToBeDeleted = studentRepository.findById(id).get();
+            Student studentToBeDeleted = studentRepository.findById(id).get();
             studentRepository.delete(studentRepository.findById(id).get());
         }
         else {
