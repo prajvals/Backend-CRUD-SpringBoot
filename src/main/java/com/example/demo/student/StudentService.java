@@ -29,7 +29,6 @@ public class StudentService {
             throw new IllegalStateException("email taken");
         }
         studentRepository.save(student);
-
     }
 
     public void deleteStudentById(Long id) {
@@ -53,6 +52,9 @@ public class StudentService {
             Optional<Student> student = studentRepository.findById(id);
             student.get().setName(name);
             studentRepository.save(student.get());
+        }
+        else{
+            throw new IllegalStateException("No Such entity exsist");
         }
     }
 }
