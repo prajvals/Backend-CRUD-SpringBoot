@@ -3,9 +3,6 @@ package com.example.demo.student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +23,7 @@ public class StudentService {
     }
 
     public void addNewStudent(Student student) {
-        Optional<Student> studentByEmail=  studentRepository.findStudentByEmail(student.getEmail());
+        Optional<Student> studentByEmail = studentRepository.findStudentByEmail(student.getEmail());
         if(studentByEmail.isPresent())
         {
             throw new IllegalStateException("email taken");
@@ -45,6 +42,17 @@ public class StudentService {
         }
         else {
             throw new IllegalStateException("No such entity exists");
+        }
+    }
+
+    public void updateStudent(Long id, String name) {
+        boolean exsists = studentRepository.existsById(id);
+        if(exsists)
+        {
+            System.out.println("called with the id " + id + "triggering the update logic ");
+            Optional<Student> student = studentRepository.findById(id);
+            student.get().setName(name);
+            studentRepository.save(student.get());
         }
     }
 }

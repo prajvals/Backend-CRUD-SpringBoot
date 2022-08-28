@@ -3,7 +3,6 @@ package com.example.demo.student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,17 +25,29 @@ public class StudentController {
     }
 
     @PostMapping
-    public void registerStudent(@RequestBody Student student)
+    public List<Student> registerStudent(@RequestBody Student student)
     {
         System.out.println(student);
         studentServices.addNewStudent(student);
+        return studentServices.getStudent();
     }
 
-    @DeleteMapping(path = "{StudentId}")
-    public void deleteStudent(@PathVariable Long Id)
+    @DeleteMapping(path = "{Id}")
+    public List<Student> deleteStudent(@PathVariable Long Id)
     {
         System.out.println(Id);
         studentServices.deleteStudentById(Id);
+        return studentServices.getStudent();
+
+    }
+
+    //the name inside the path and inside the function should be the same
+    @PutMapping(path = "{Id}")
+    public List<Student> updateStudent(@PathVariable Long Id, @RequestParam(value = "name") String name)
+    {
+        System.out.println(Id);
+        studentServices.updateStudent(Id,name);
+        return studentServices.getStudent();
     }
 }
 
@@ -52,5 +63,7 @@ where the dependency is added by the spring boot framework itself
 it makes the component/service/bean, and then pass it in feilds we required, when we use autowired with it alright yeah
 
 there is more to it which I can learn from the durgesh channel.
+
+need to read this //https://stackoverflow.com/questions/42135114/how-does-spring-jpa-hibernate-ddl-auto-property-exactly-work-in-spring
 
  */
